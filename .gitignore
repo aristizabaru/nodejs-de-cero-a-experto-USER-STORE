@@ -5,6 +5,7 @@ package-lock.json
 # dist
 .DS_Store
 dist/
+build/
 
 # enviroment
 logs/
