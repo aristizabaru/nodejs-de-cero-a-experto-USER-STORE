@@ -1,14 +1,63 @@
-# Rest Project + TypeScript
+# NodeJS: De cero a experto (USER STORE)
 
-Este proyecto previamente inicializado tiene todo lo necesario para trabajar con TypeScript, Express y Rest.
+## Acerca de
 
-Cada paso de su configuración ya se ha realizado previamente en el curso, por lo que solo es necesario clonar el proyecto y comenzar a trabajar.
+Este es un repositorio personal para ejecución de los proyectos del cursos **NodeJS: De cero a experto** de **Fernando Herrera** en Udemy. Para acceder al curso completo puede hacer [clic aquí](https://www.udemy.com/course/node-de-cero-a-experto/)
 
+El proyecto desarrollado a continuación es un xxxx implementado con Express. En el proceso se exploran fundamentos de Arquitectura Limpias entre otros conceptos más de arquitectura de software.
 
-## Instalación
+## Requerimientos
 
-1. Clonar .env.template a .env y configurar las variables de entorno
-2. Ejecutar `npm install` para instalar las dependencias
-3. En caso de necesitar base de datos, configurar el docker-compose.yml y ejecutar `docker-compose up -d` para levantar los servicios deseados.
-4. Ejecutar `npm run dev` para levantar el proyecto en modo desarrollo
+- Node 20.9.0 LTS
+- Express 4.18.2
+- Docker 24.0.5
 
+## Instalación del proyecto
+
+Para instalar el proyecto siga los siguientes pasos
+
+Instalar módulos o dependencias
+
+```
+npm install
+```
+
+## Ejecución del proyecto
+
+Para ejecutar el proyecto se deben seguir los siguientes pasos:
+
+1. Clonar el archivo `.env.template` a `.env`
+2. Configurar variables de entorno
+
+```
+PORT=3000
+PUBLIC_PATH=public
+```
+
+3. Levantar las bases de datos
+
+```
+docker compose up -d
+
+```
+
+4. Generar las migraciones de Prisma a la base de dato de Postgres
+
+```
+npx prisma migrate dev
+
+```
+
+5. Correr el proyecto usando alguno de los siguientes scripts según el entorno
+
+Ejecutar entorno de desarrollo
+
+```
+npm run dev
+```
+
+Ejecutar entorno de producción
+
+```
+npm start
+```
