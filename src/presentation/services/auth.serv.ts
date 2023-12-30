@@ -1,5 +1,6 @@
+import { HashAdapter } from "../../config";
 import { userModel } from "../../data";
-import { CustomError, RegisterUserDto, UserEntity } from "../../domain";
+import { CustomError, LoginUserDto, RegisterUserDto, UserEntity } from "../../domain";
 
 export class AuthService {
 
@@ -9,15 +10,14 @@ export class AuthService {
     public async registerUser(registerUserDto: RegisterUserDto) {
 
         const existUser = await userModel.findOne({ email: registerUserDto.email })
-
         if (existUser) throw CustomError.badRequest('Email already exist')
 
         try {
 
             const user = new userModel(registerUserDto)
-            await user.save()
-
             //* Encriptar contraseña
+            user.password = HashAdapter.hash(registerUserDto.password)
+            await user.save()
 
             //* JWT <--- para mantener la autenticación del usuario
 
@@ -31,6 +31,22 @@ export class AuthService {
 
         } catch (error) {
             throw CustomError.internalServer(`${error}`)
+        }
+    }
+
+    public async loginUser(loginUserDto: LoginUserDto) {
+
+        const user = await userModel.findOne({ email: loginUserDto.email })
+        if (!user) throw CustomError.badRequest('Email does not exist')
+
+        const isMatching = HashAdapter.compare(loginUserDto.password, user.password)
+        if (!isMatching) throw CustomError.badRequest('Password is not valid')
+
+        const { password, ...userEntity } = UserEntity.fromObject(user)
+
+        return {
+            user: userEntity,
+            token: 'ABC'
         }
     }
 }
