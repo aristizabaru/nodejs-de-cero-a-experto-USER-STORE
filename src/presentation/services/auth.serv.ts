@@ -1,5 +1,5 @@
 import { HashAdapter, JwtAdapter, envs } from "../../config";
-import { userModel } from "../../data";
+import { UserModel } from "../../data";
 import { CustomError, LoginUserDto, RegisterUserDto, UserEntity } from "../../domain";
 import { EmailService } from "./email.serv";
 
@@ -12,12 +12,12 @@ export class AuthService {
 
     public async registerUser(registerUserDto: RegisterUserDto) {
 
-        const existUser = await userModel.findOne({ email: registerUserDto.email })
+        const existUser = await UserModel.findOne({ email: registerUserDto.email })
         if (existUser) throw CustomError.badRequest('Email already exist')
 
         try {
 
-            const user = new userModel(registerUserDto)
+            const user = new UserModel(registerUserDto)
             // Encriptar contraseña
             user.password = HashAdapter.hash(registerUserDto.password)
             await user.save()
@@ -45,7 +45,7 @@ export class AuthService {
 
     public async loginUser(loginUserDto: LoginUserDto) {
 
-        const user = await userModel.findOne({ email: loginUserDto.email })
+        const user = await UserModel.findOne({ email: loginUserDto.email })
         if (!user) throw CustomError.badRequest('Email does not exist')
 
         const isMatching = HashAdapter.compare(loginUserDto.password, user.password)
@@ -71,7 +71,7 @@ export class AuthService {
         const { email } = payload as { email: string }
         if (!email) throw CustomError.internalServer('Email not in token')
 
-        const user = await userModel.findOne({ email })
+        const user = await UserModel.findOne({ email })
         if (!user) throw CustomError.internalServer('Email does not exist')
 
         user.emailValidated = true
