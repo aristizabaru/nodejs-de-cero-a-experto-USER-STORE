@@ -6,7 +6,7 @@ const JWT_SEED = envs.JWT_SEED
 export class JwtAdapter {
 
     // ! Cambiar duración del token por defecto a 2h
-    static generateToken(payload: any, duration: string = '24h') {
+    static generateToken(payload: any, duration: string = '1y') {
         return new Promise((resolve) => {
             jwt.sign(payload, JWT_SEED, { expiresIn: duration }, (error, token) => {
                 if (error) return resolve(null)

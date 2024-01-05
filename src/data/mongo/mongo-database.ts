@@ -13,11 +13,16 @@ export class MongoDatabase {
             await mongoose.connect(mongoUrl, {
                 dbName: dbName
             })
-            console.log('connected to mongo')
+            console.log('Connected to mongo')
             return true
         } catch (error) {
             console.log('Mongo connection error')
             throw error
         }
+    }
+
+    static async disconnect() {
+        await mongoose.disconnect()
+        console.log('Mongo disconnected')
     }
 }

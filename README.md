@@ -4,7 +4,7 @@
 
 Este es un repositorio personal para ejecución de los proyectos del cursos **NodeJS: De cero a experto** de **Fernando Herrera** en Udemy. Para acceder al curso completo puede hacer [clic aquí](https://www.udemy.com/course/node-de-cero-a-experto/)
 
-El proyecto desarrollado a continuación es un xxxx implementado con Express. En el proceso se exploran fundamentos de Arquitectura Limpias entre otros conceptos más de arquitectura de software.
+El proyecto desarrollado a continuación es una implementación básica de un REST API para una tienda implementada con Express. En el proceso se exploran fundamentos de Arquitectura Limpias, inyección de dependencias entre otros conceptos más de arquitectura de software.
 
 ## Requerimientos
 
@@ -41,10 +41,10 @@ docker compose up -d
 
 ```
 
-4. Generar las migraciones de Prisma a la base de dato de Postgres
+4. Para ejecutar el seeder de la base de datos con data de prueba
 
 ```
-npx prisma migrate dev
+npm run seed
 
 ```
 

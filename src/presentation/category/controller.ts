@@ -1,6 +1,7 @@
-import e, { Request, Response } from "express"
+import { Request, Response } from "express"
 import { CreateCategoryDto, CustomError, PaginationDto } from "../../domain"
-import { CategoryService } from "../services/category.serv"
+import { CategoryService } from "../services"
+
 
 export class CategoryController {
 
