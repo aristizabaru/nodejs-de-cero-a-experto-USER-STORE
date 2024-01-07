@@ -25,3 +25,6 @@ coverage/
 
 # self certificate
 key/
+
+# images
+uploads/*
